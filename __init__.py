@@ -1,2 +1,3 @@
 #!/usr/bin/python3
-from src/aneye import video picture
+from aneye.src.aneye import video,picture
+
