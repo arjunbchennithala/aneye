@@ -4,6 +4,8 @@
 
 ## Use aneye module by creating a python file outside the cloned aneye folder , then import aneye module.
 
+## Create pull request to dev branch.
+
 ## Two Methods are used to detect and display faces:
 
  ### video()
