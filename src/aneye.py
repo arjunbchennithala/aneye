@@ -39,16 +39,15 @@ fontScale = 1
 color = (0,255,0)
 color2 = (0,255,200)
 thickness = 2
-org = (50,50)
-org2 = (50,80)
 
 #Method video definition
-def video(filename="../video/short_hamilton_clip.mp4",method=0,body=0):
+def video(filename="../video/short_hamilton_clip.mp4",method=0,body=0,scale=1,title="Video"):
 	
 	faces = 0
 	bodies = 0
-	cap = cv2.VideoCapture(filename) 
-	
+	cap = cv2.VideoCapture(filename)
+	name = str(type(filename))[1:-1].split(" ")[-1][1:-1]
+
 	while True:
 		ret,frame = cap.read() #Extracting each frames
 		
@@ -91,31 +90,33 @@ def video(filename="../video/short_hamilton_clip.mp4",method=0,body=0):
 				
 			#Writing text above the frame
 			word = "Faces detected : "+str(len(faces))
-			cv2.putText(frame,word, org, font, fontScale, color, thickness, cv2.LINE_AA)
+			cv2.putText(frame,word, (20,gray.shape[0]-60), font, fontScale, color, thickness, cv2.LINE_AA)
 			
 			if body:
 				word = "Bodies detected : "+str(len(bodies))
-				cv2.putText(frame,word, org2, font, fontScale, color2, thickness, cv2.LINE_AA)
+				cv2.putText(frame,word, (20,gray.shape[0]-30), font, fontScale, color2, thickness, cv2.LINE_AA)
 			
-			cv2.imshow("Frames",frame) #Displaying the result
+			resize = cv2.resize(frame,(int(frame.shape[1]/scale),int(frame.shape[0]/scale)))
+			cv2.imshow(title,resize) #Displaying the result
 			if cv2.waitKey(30) & 0xFF == ord('q'):
 				break
 		else:
 			break
 			
-			
+	if name == "int":
+		cap.release()
 
 #Definition of picture Method
-def picture(filename="../pictures/kit_with_rose.jpg",method=0,body=0):
+def picture(filename="../pictures/kit_with_rose.jpg",method=0,body=0,scale=1.5,title="picture"):
 	faces = 0
 	bodies = 0
-	img = cv2.imread(filename,1)
+	img = cv2.imread(filename)
 		
 	gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
 	if method == 0:
 		faces = face_cascade.detectMultiScale(gray,1.189,8)
 		if body:
-			bodies = body_cascade.detectMultiScale(gray,1.5,2)
+			bodies = body_cascade.detectMultiScale(gray,2,2)
 		if len(faces) > 0:
 			for (x,y,w,h) in faces:
 				cv2.rectangle(img,(x,y),(x+w,y+h),(0,255,0),2)
@@ -148,17 +149,17 @@ def picture(filename="../pictures/kit_with_rose.jpg",method=0,body=0):
 	if len(faces) > 0:
 		word = "Faces detected : "+str(len(faces))
 		print(word)
-		cv2.putText(img,word, org, font, fontScale, color, thickness, cv2.LINE_AA)
+		cv2.putText(img,word, (20,gray.shape[0]-60), font, fontScale, color, thickness, cv2.LINE_AA)
 		
 	if body:
 		word = "Bodies detected : "+str(len(bodies))
 		print(word)
-		cv2.putText(img,word, org2, font, fontScale, color2, thickness, cv2.LINE_AA)
+		cv2.putText(img,word, (20,gray.shape[0]-30), font, fontScale, color2, thickness, cv2.LINE_AA)
 		
-	resize = cv2.resize(img,(int(img.shape[1]/1.5),int(img.shape[0]/1.5)))
+	resize = cv2.resize(img,(int(img.shape[1]/scale),int(img.shape[0]/scale)))
 	
 					
-	cv2.imshow("Image",resize)
+	cv2.imshow(title,resize)
 	cv2.waitKey(0)
 	
 cv2.destroyAllWindows()
