@@ -1,26 +1,50 @@
-# aneye
+## Aneye
+
 Face detection and Body detection module for python.
 
-use the module /src/aneye.py
+Use aneye module by creating a python file outside the cloned aneye folder , then import aneye module.
 
-Two Methods are used to detect and display faces
+# Two Methods are used to detect and display faces:
 
-##video()
-##picture()
-video(filename="<filename>",method=<0/1>,body=<0/1>)
-picture(filename="<filename>",method=<0/1>,body=<0/1>)
+ video()
+ picture()
 
-Properties in Methods:
-  filename : It is the name of your selected file.There is default file in both.
+## video(filename="<filename>",method=<0/1>,body=<0/1>,scale=<1-10>,title="")
+ picture(filename="<filename>",method=<0/1>,body=<0/1>,scale=<1-10>,title="")
+
+# Properties in Methods:
+# filename : It is the name of your selected file.There is default file in both.
   method : It is the capability of detection 0 is default value 0 uses the Trained model,1 uses an external library called face_recognition.
   body : It tells the program to detect or don't detect body.Default is 0/False.
+  scale : It tells the program whether you want to scale more number means more decreased window.Default is 1 
+  
+  
 
-example 1:
+# example 1:
+
   import aneye
+  
   aneye.picture()
   
- example 2:
+  
+# example 2:
+
  import aneye
- aneye.picture(filename="../pictures/biden.jpg",method=1,body=1)
+ 
+ aneye.picture(filename="aneye/pictures/biden.jpg",method=1,body=1,scale=2,title="Sample")
+ 
+ 
+ # example 3:
+
+  import aneye
+  
+  aneye.video()
+  
+  
+# example 4:
+
+ import aneye
+ 
+ aneye.picture(filename="<file>",method=1,body=1,scale=2,title="Sample")
  
   
