@@ -6,8 +6,8 @@ import cv2
 import face_recognition as fr 
 
 #Importing Trained models for detecting face and body
-face_cascade = cv2.CascadeClassifier("../cascade/face_cascade.xml")
-body_cascade = cv2.CascadeClassifier("../cascade/fullbody_cascade.xml")
+face_cascade = cv2.CascadeClassifier("aneye/cascade/face_cascade.xml")
+body_cascade = cv2.CascadeClassifier("aneye/cascade/fullbody_cascade.xml")
 
 #Text properties configuration
 font = cv2.FONT_HERSHEY_SIMPLEX 
@@ -17,7 +17,7 @@ color2 = (0,255,200)
 thickness = 2
 
 #Method video definition
-def video(filename="../video/short_hamilton_clip.mp4",method=0,body=0,scale=1,title="Video"):
+def video(filename="aneye/video/short_hamilton_clip.mp4",method=0,body=0,scale=1,title="Video"):
 	
 	faces = 0
 	bodies = 0
@@ -83,7 +83,7 @@ def video(filename="../video/short_hamilton_clip.mp4",method=0,body=0,scale=1,ti
 		cap.release()
 
 #Definition of picture Method
-def picture(filename="../pictures/kit_with_rose.jpg",method=0,body=0,scale=1.5,title="picture"):
+def picture(filename="aneye/pictures/kit_with_rose.jpg",method=0,body=0,scale=1.5,title="picture"):
 	faces = 0
 	bodies = 0
 	img = cv2.imread(filename)
